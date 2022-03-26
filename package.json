@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
     "createdb": "sequelize db:create",
-    "createmigration": "sequelize migration:create --name=create_points_table",
+    "createmigration": "sequelize migration:create --name=create_password_column",
     "migrate": "sequelize db:migrate",
     "removelastmigrate": "sequelize db:migrate:undo"
   },

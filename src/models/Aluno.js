@@ -10,9 +10,13 @@ const Aluno = database.define('alunos', {
         type: Sequelize.STRING,
     },
 
+    password: {
+        type: Sequelize.STRING,
+    },
+
     admin: {
         type: Sequelize.BOOLEAN
     }
-})
+});
 
 module.exports = Aluno;
