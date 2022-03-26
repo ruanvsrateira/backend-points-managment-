@@ -22,7 +22,6 @@ exports.getAllAlunos = async function(req, res) {
         order: [
             ['id', 'DESC']
         ],
-       
     });
 
     return res.json(users);

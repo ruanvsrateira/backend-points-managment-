@@ -10,6 +10,6 @@ exports.validaLogin = async function(req, res) {
     if(user) {
         return res.json({ msg: 'Aluno encontrado' });
     } else {
-        return res.json({ error: "Credenciais Incorretas !" })
+        return res.json({ error: "Credenciais Incorretas !" });
     }
 }
