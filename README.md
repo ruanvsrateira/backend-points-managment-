@@ -1,4 +1,4 @@
-<h1>backend - points-managment</h1>
+<h1>BACKEND POINTS MANAGMENT</h1>
 
 <br>
 
