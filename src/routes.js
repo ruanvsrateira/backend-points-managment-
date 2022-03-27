@@ -22,5 +22,6 @@ routes.get('/:userId/delete_aluno/', AlunoController.deleteAluno);
     routes.post('/:user_id/add_point', PointController.store);
     routes.get('/user/:user_id/points', PointController.getPointsUser);
     routes.post('/user/:point_id/points_edited', PointController.editPoints);
+    routes.get('/:point_id/delete_point', PointController.deletePoint);
 
     module.exports = routes;

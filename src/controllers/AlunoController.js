@@ -4,7 +4,6 @@ const Point = require('../models/Point');
 
 exports.store = async function(req, res) {
     const { nome, email, password, admin } = req.body;
-
     const exist = await Aluno.findOne({ where: { email } });
 
     if (exist) {
@@ -12,7 +11,7 @@ exports.store = async function(req, res) {
     }
 
     console.log(nome, email, admin, password);
-    const user = await Aluno.create({ nome, email, password, admin });
+    const user = await Aluno.create({ nome, email, password, admin, total_points: 0 });
 
     return res.json(user);
 }
@@ -20,7 +19,7 @@ exports.store = async function(req, res) {
 exports.getAllAlunos = async function(req, res) {
     const users = await Aluno.findAll({
         order: [
-            ['id', 'DESC']
+            ['total_points', 'DESC']
         ],
     });
 

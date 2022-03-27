@@ -13,8 +13,8 @@ const Point = database.define('points', {
 
     user_id: {
         type: Sequelize.INTEGER
-    }
-})
+    },
+});
 
 const User = require('../models/Aluno');
 

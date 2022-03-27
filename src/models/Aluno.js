@@ -15,8 +15,12 @@ const Aluno = database.define('alunos', {
     },
 
     admin: {
-        type: Sequelize.BOOLEAN
-    }
+        type: Sequelize.BOOLEAN,
+    },
+
+    total_points: {
+        type: Sequelize.INTEGER,
+    },
 });
 
 module.exports = Aluno;

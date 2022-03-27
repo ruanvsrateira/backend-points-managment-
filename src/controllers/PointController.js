@@ -9,13 +9,26 @@ exports.store = async function(req, res) {
         points, motivo, user_id
     });
 
-    console.log(point);
+    let oldTotalPoints = await Aluno.findOne({ where: { id: user_id } });
+    oldTotalPoints = oldTotalPoints.total_points;
+
+    const total_points = oldTotalPoints + points;
+
+    const user = await Aluno.findOne({ where: { id: user_id } });
+    await user.update({ total_points });
+
+    return res.json(total_points)
 };
 
 exports.getPointsUser = async function(req, res) {
     const { user_id } = req.params;
 
-    const points = await Point.findAll({ where: { user_id } });
+    const points = await Point.findAll({ 
+        where: { user_id },
+        order: [
+            ['points', 'DESC']
+        ]
+    });
 
     if (Object.keys(points).length) {
         return res.json(points);
@@ -37,7 +50,7 @@ exports.getAllPoints = async function(req, res) {
         }]
     });
 
-    return res.json(Object.points);
+    return res.json(points);
 };
 
 exports.editPoints = async function(req, res) {
@@ -47,4 +60,13 @@ exports.editPoints = async function(req, res) {
     const point = await Point.update({ motivo, points }, { where: { id: point_id } });
 
     res.json(point);
+};
+
+exports.deletePoint = async function(req, res) {
+    const { point_id } = req.params;
+
+    const point = await Point.findOne({ where: { id: point_id } });
+    point.destroy();
+
+    return res.json({ pontoremovido: point });
 }
