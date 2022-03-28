@@ -45,7 +45,7 @@
     docker-compose up -d
 
     # Rodar api
-    node src/server.js
+    npm run start
 ```
 <hr>
 
