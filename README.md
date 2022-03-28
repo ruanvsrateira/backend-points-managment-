@@ -17,6 +17,12 @@
 
 <br>
 
+<li><strong>JWT(json web token)</strong> foi usado para authenticaçãoa de usuário</li>
+<li><strong>Bcrypt</strong> foi usado para cryptografar as senhas para salvar no banco de dados, e para verificar senha a senha do login é igual a do BD</li>
+<li><strong>Docker</strong> foi usado para armazenar o banco de dados <strong>postgreSQL</strong></li>
+<li><strong>Sequelize</strong> foi usado com ORM para dar instruções para o banco de dados</li>
+
+<br>
 <h2><img style="height: 30px" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" />  Pré-requisitos: </h2>
 <li><a href="https://git-scm.com/">Git</a></li>
 <li><a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a></li>
