@@ -5,19 +5,24 @@ exports.store = async function(req, res) {
     const { points, motivo } = req.body;
     const { user_id } = req.params
 
-    const point = await Point.create({
-        points, motivo, user_id
-    });
-
-    let oldTotalPoints = await Aluno.findOne({ where: { id: user_id } });
-    oldTotalPoints = oldTotalPoints.total_points;
-
-    const total_points = oldTotalPoints + points;
-
     const user = await Aluno.findOne({ where: { id: user_id } });
-    await user.update({ total_points });
 
-    return res.json(total_points)
+    if (user) {
+        const point = await Point.create({
+            points, motivo, user_id
+        });
+    
+        let oldTotalPoints = await Aluno.findOne({ where: { id: user_id } });
+        oldTotalPoints = oldTotalPoints.total_points;
+    
+        const total_points = oldTotalPoints + points;
+    
+        await user.update({ total_points });
+
+        return res.json({ total_points: total_points });
+    } else {
+        return res.json({ error: "User is not exist" });    
+    }
 };
 
 exports.getPointsUser = async function(req, res) {
@@ -39,7 +44,7 @@ exports.getPointsUser = async function(req, res) {
 };
 
 exports.getAllPoints = async function(req, res) {
-    const points = await Point.findAll({
+    const points = await Point.findAll({    
         order: [
             ['points', 'DESC']
         ],

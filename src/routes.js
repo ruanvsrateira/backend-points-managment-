@@ -3,25 +3,32 @@ const AlunoController = require('./controllers/AlunoController');
 const PointController = require('./controllers/PointController');
 const LoginController = require('./controllers/LoginController');
 
+const tokenMiddleware = require('./middlewares/jwtMiddleware');
+const adminMiddleware = require('./middlewares/isAdminMiddleware');
+
 const routes = express.Router();
 
-// Rotas do aluno
-routes.post('/alunos/register', AlunoController.store);
-routes.get('/alunos', AlunoController.getAllAlunos);
-routes.get('/:userId/delete_aluno/', AlunoController.deleteAluno);
-
-// Rota de login do Aluno
+// ROTAS NORMAIS
+    routes.post('/alunos/register', AlunoController.store);
+    routes.get('/alunos', tokenMiddleware.verifyToken, AlunoController.getAllAlunos);
     routes.post('/logar', LoginController.validaLogin);
-    routes.get('/alunos/:user_id/', AlunoController.getOneAluno);
+    routes.get('/alunos/:user_id/', tokenMiddleware.verifyToken, AlunoController.getOneAluno);
+    routes.get('/logout', tokenMiddleware.verifyToken, LoginController.logout);
+    routes.get('/points', tokenMiddleware.verifyToken, PointController.getAllPoints);  
+    routes.get('/user/:user_id/points', tokenMiddleware.verifyToken, PointController.getPointsUser);
 
 
-// Pegando todos os pontos
-    routes.get('/points', PointController.getAllPoints)
+// ROTAS ADMINISTRATIVAS 
+    routes.get('/:user_id/delete_aluno/', tokenMiddleware.verifyToken, adminMiddleware.adminVerify, AlunoController.deleteAluno);
+    routes.post('/:user_id/add_point', tokenMiddleware.verifyToken, adminMiddleware.adminVerify, PointController.store);
+    routes.post('/user/:point_id/points_edited', tokenMiddleware.verifyToken, adminMiddleware.adminVerify, PointController.editPoints);
+    routes.get('/:point_id/delete_point', tokenMiddleware.verifyToken, adminMiddleware.adminVerify, PointController.deletePoint);
 
-// Rota de Edição de pontos
-    routes.post('/:user_id/add_point', PointController.store);
-    routes.get('/user/:user_id/points', PointController.getPointsUser);
-    routes.post('/user/:point_id/points_edited', PointController.editPoints);
-    routes.get('/:point_id/delete_point', PointController.deletePoint);
+
+// ROTAS INFORMATIVAS
+    routes.get('/user/isAdmin', AlunoController.userLoggedIsAdmin);
+    routes.get('/user/isLogged', AlunoController.userIsLogged);
+
+
 
     module.exports = routes;

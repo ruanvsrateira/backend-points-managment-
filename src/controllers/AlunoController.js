@@ -27,11 +27,15 @@ exports.getAllAlunos = async function(req, res) {
 }
 
 exports.deleteAluno = async function(req, res) {
-    const userId = req.params.userId;
+    const user_id = req.params.user_id;
 
-    const user = await Aluno.destroy({ where: { id: userId } });
+    const user = await Aluno.destroy({ where: { id: user_id } });
 
-    return res.json(user);
+    if (user) {
+        res.json({ msg: "user detroied" })
+    } else { 
+        res.json({ error: "User not finded by this id" });
+    }
 }
 
 exports.getOneAluno = async function(req, res) {
@@ -44,4 +48,24 @@ exports.getOneAluno = async function(req, res) {
     } else {
         return res.json({error: "Aluno not finded"})
     }
+}
+
+exports.userLoggedIsAdmin = async function(req, res) {
+    const userLogged = req.session.user;
+
+    if (userLogged) {
+        
+        userLogged.admin ? res.json({ isAdmin: true }) : res.json({ isAdmin: false });
+
+    } else {
+        return res.json({ error: "Not a user Logged" });
+    }
+}
+
+exports.userIsLogged = async function(req, res) {
+
+    const userIsLogged = req.session.user;
+
+    userIsLogged ? res.json({ userIsLogged: true }) : res.json({ userIsLogged: false });
+
 }
