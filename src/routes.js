@@ -16,6 +16,7 @@ const routes = express.Router();
     routes.get('/logout', tokenMiddleware.verifyToken, LoginController.logout);
     routes.get('/points', tokenMiddleware.verifyToken, PointController.getAllPoints);  
     routes.get('/user/:user_id/points', tokenMiddleware.verifyToken, PointController.getPointsUser);
+    routes.get('/adminUsers', tokenMiddleware.verifyToken, AlunoController.getUsersAdmin);
 
 
 // ROTAS ADMINISTRATIVAS 
@@ -26,7 +27,7 @@ const routes = express.Router();
 
 
 // ROTAS INFORMATIVAS
-    routes.get('/user/isAdmin', AlunoController.userLoggedIsAdmin);
+    routes.get('/user/isAdmin', tokenMiddleware.verifyToken, AlunoController.userLoggedIsAdmin);
     routes.get('/user/isLogged', AlunoController.userIsLogged);
 
 

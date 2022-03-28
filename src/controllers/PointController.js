@@ -19,7 +19,7 @@ exports.store = async function(req, res) {
     
         await user.update({ total_points });
 
-        return res.json({ total_points: total_points });
+        return res.json({ point_created: point, total_points_for_user: total_points });
     } else {
         return res.json({ error: "User is not exist" });    
     }
@@ -62,16 +62,29 @@ exports.editPoints = async function(req, res) {
     const { point_id } = req.params;
     const { motivo, points } = req.body;
 
-    const point = await Point.update({ motivo, points }, { where: { id: point_id } });
+    point_finded = await Point.findOne({ where: { id: point_id } });
 
-    res.json(point);
+    if(point_finded) {
+
+        const point = await Point.update({ motivo, points }, { where: { id: point_id } });
+
+        return res.json(point);
+    } else {
+        return res.json({ error: "not finded point by this id" });
+    }
 };
 
 exports.deletePoint = async function(req, res) {
     const { point_id } = req.params;
 
     const point = await Point.findOne({ where: { id: point_id } });
-    point.destroy();
+ 
+    if (point) {
+        point.destroy();
 
-    return res.json({ pontoremovido: point });
+        return res.json({ pontoremovido: point });
+    } else {
+        return res.json({ error: "point not exist" });
+    }
+    
 }
