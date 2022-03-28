@@ -33,7 +33,7 @@
 
 ```bash
     # clonar repositório
-    git clone git@github.com:ruanvsrateira/backend-points-managment-.git
+    git clone http://github.com/ruanvsrateira/backend-points-managment-.git
 
     # Entrar no repositório
     cd backend-points-managment-
