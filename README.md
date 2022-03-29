@@ -43,7 +43,10 @@
 
     # Iniciar Container com banco de dados
     docker-compose up -d
-
+    
+    # Criar tabelas no banco de dados
+    npm run migrate
+    
     # Rodar api
     npm run start
 ```
