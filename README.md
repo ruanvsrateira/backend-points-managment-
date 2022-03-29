@@ -53,4 +53,4 @@
 <hr>
 
 
-Desenvolvido por <a href="https://github.com/ruanvsrateira">Ruan Victor</a>
+Desenvolvido por <a href="www.linkedin.com/in/ruanvsrateira">Ruan Victor</a>
