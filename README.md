@@ -53,4 +53,4 @@
 <hr>
 
 
-Desenvolvido por <a href="www.linkedin.com/in/ruanvsrateira" target="__blank">Ruan Victor</a>
+Desenvolvido por <a href="htpps://www.linkedin.com/in/ruanvsrateira" target="__blank">Ruan Victor</a>
