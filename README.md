@@ -5,6 +5,10 @@
 
 <br>
 
+<h2>⚠️ O projeto ainda não está em sua versão final, esta em fase de desenvolvimento ⚠️</h2>
+
+<br />
+
 <h2><img style="height: 25px" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" /> Técnologias usadas no projeto</h2>
 <p>
     <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
